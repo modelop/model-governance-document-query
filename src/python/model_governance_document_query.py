@@ -88,9 +88,9 @@ def score(df: pd.DataFrame) -> Generator[dict, None, None]:
 # sure the chat history function is working correctly.
 #
 def main():
-    result = next(action(pd.DataFrame([{"question": "What penalties occur if I do not govern my models properly"}])))
+    result = next(score(pd.DataFrame([{"question": "What penalties occur if I do not govern my models properly"}])))
     print(json.dumps(result, indent=2))
-    result = next(action(pd.DataFrame([{"question": "What would that value be in USD?", "chat_history": result.get("chat_history")}])))
+    result = next(score(pd.DataFrame([{"question": "What would that value be in USD?", "chat_history": result.get("chat_history")}])))
     print(json.dumps(result, indent=2))
 
 
