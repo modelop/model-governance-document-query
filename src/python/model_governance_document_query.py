@@ -38,7 +38,7 @@ def get_llm_instance() -> LLM:
 
 
 #
-# The action function is the function called by modelop center engine on a given request.  It will receive one row of
+# The score function is the function called by modelop center engine on a given request.  It will receive one row of
 # data from the data file and in the case of a batch process will be called repeatedly until the process is complete.
 # In this case, it first instantiates either a local LLM instance, if a gguf file exists in the deployment, otherwise
 # it will utilize the default openai model as a vendor endpoint.  It will then take the input and look for the question
@@ -46,8 +46,8 @@ def get_llm_instance() -> LLM:
 # To continue the conversation with the model, send back in the chat_history for context.
 #
 
-# modelop.action
-def action(df: pd.DataFrame) -> Generator[dict, None, None]:
+# modelop.score
+def score(df: pd.DataFrame) -> Generator[dict, None, None]:
     llm = get_llm_instance()
     system_prompt = load_prompt("prompts/system_prompt.json")
     user_prompt = load_prompt("prompts/user_prompt.json")
