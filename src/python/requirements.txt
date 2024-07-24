@@ -6,7 +6,7 @@ chromadb>=0.5.5
 tqdm>=4.66.1
 unstructured>=0.15.0
 unstructured[pdf]
-sentence_transformers>=3.0.3
+sentence_transformers>=2.2.2
 llama-cpp-python>=0.2.83
 # Windows Only
 #python-magic-bin>=0.4.14
