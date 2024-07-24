@@ -7,7 +7,7 @@ from langchain_community.vectorstores import Chroma
 
 
 def main():
-    loader = DirectoryLoader('./source_documents', glob='**/*.pdf', show_progress=True)
+    loader = DirectoryLoader('source_documents', glob='**/*.pdf', show_progress=True)
     documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50, add_start_index=True)
     docs = text_splitter.split_documents(documents)
