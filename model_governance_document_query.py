@@ -47,7 +47,7 @@ def get_llm_instance() -> LLM:
 #
 
 # modelop.score
-def score(df: pd.DataFrame) -> Generator[dict, None, None]:
+def score(data: dict) -> Generator[dict, None, None]:
     llm = get_llm_instance()
     system_prompt = load_prompt("prompts/system_prompt.json")
     user_prompt = load_prompt("prompts/user_prompt.json")
@@ -63,15 +63,15 @@ def score(df: pd.DataFrame) -> Generator[dict, None, None]:
                                                   return_source_documents=True, verbose=True,
                                                   combine_docs_chain_kwargs={'prompt': qa_prompt})
     chat_history = []
-    for history in df.iloc[0].get('chat_history', []):
+    for history in data.get('chat_history', []):
         chat_history.append(tuple(history))
     llm_result: dict = chain.invoke({
-        "question": df.iloc[0].get("question"),
+        "question": data.get("question"),
         "chat_history": chat_history})
     result = {"question": llm_result.get("question", ""),
               "answer": llm_result.get("answer", ""),
               "chat_history": llm_result.get("chat_history", []),
-              "source_documents": df.iloc[0].get('chat_history', [])}
+              "source_documents": data.get('chat_history', [])}
     result["chat_history"].append([llm_result["question"], llm_result["answer"]])
     for document in llm_result.get("source_documents", []):
         result["source_documents"].append({
@@ -88,9 +88,9 @@ def score(df: pd.DataFrame) -> Generator[dict, None, None]:
 # sure the chat history function is working correctly.
 #
 def main():
-    result = next(score(pd.DataFrame([{"question": "What penalties occur if I do not govern my models properly"}])))
+    result = next(score({"question": "What penalties occur if I do not govern my models properly"}))
     print(json.dumps(result, indent=2))
-    result = next(score(pd.DataFrame([{"question": "What would that value be in USD?", "chat_history": result.get("chat_history")}])))
+    result = next(score({"question": "What would that value be in USD?", "chat_history": result.get("chat_history")}))
     print(json.dumps(result, indent=2))
 
 
