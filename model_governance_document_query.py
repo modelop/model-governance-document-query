@@ -2,7 +2,6 @@ import glob
 import json
 import os
 
-import pandas as pd
 import torch
 
 from typing import Generator
@@ -32,7 +31,7 @@ def get_llm_instance() -> LLM:
                        model_kwargs={"max_length": 10000}, n_ctx=2048,
                        n_gpu_layers=80 if torch.cuda.is_available() else 0, verbose=True, top_p=1, temperature=0.2)
     else:
-        llm = ChatOpenAI(temperature=0.2, max_tokens=2048)
+        llm = ChatOpenAI(model='gpt-4o', temperature=0.2, max_tokens=2048)
 
     return llm
 
