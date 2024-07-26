@@ -1,0 +1,54 @@
+{
+  "type": "record",
+  "name": "inferred_schema",
+  "fields": [
+    {
+      "name": "question",
+      "type": "string",
+      "dataClass": "categorical",
+      "role": "predictor",
+      "protectedClass": false,
+      "driftCandidate": true,
+      "specialValues": [],
+      "scoringOptional": false,
+      "pii": false,
+      "phi": false
+    },
+    {
+      "name": "answer",
+      "type": "string",
+      "dataClass": "categorical",
+      "role": "score",
+      "protectedClass": false,
+      "driftCandidate": true,
+      "specialValues": [],
+      "scoringOptional": false,
+      "pii": false,
+      "phi": false
+    },
+    {
+      "name": "chat_history",
+      "type": "string",
+      "dataClass": "categorical",
+      "role": "non_predictor",
+      "protectedClass": false,
+      "driftCandidate": true,
+      "specialValues": [],
+      "scoringOptional": false,
+      "pii": false,
+      "phi": false
+    },
+    {
+      "name": "source_documents",
+      "type": "string",
+      "dataClass": "categorical",
+      "role": "non_predictor",
+      "protectedClass": false,
+      "driftCandidate": true,
+      "specialValues": [],
+      "scoringOptional": false,
+      "pii": false,
+      "phi": false
+    }
+  ]
+}
